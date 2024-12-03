@@ -1,3 +1,5 @@
 /target
 .idea
+.lsp
+.clj-kondo
 Cargo.lock
