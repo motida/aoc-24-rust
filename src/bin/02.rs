@@ -79,19 +79,19 @@ fn main() -> Result<()> {
     println!("Result = {}", result);
     //endregion
 
+    fn is_safe(v: &Vec<u32>)-> bool {
+        let d: Vec<i32> = v.windows(2).map(|x| x[1] as i32 - x[0] as i32).collect();
+    
+        if d.iter().all(|w| w >=&1 && w <= &3) {
+            return true;
+        }
+        if d.iter().all(|w|  w <= &-1 && w >= &-3 ) {
+            return true;
+        }
+        return false;
+    }
+
     Ok(())
 
 
-}
-
-fn is_safe(v: &Vec<u32>)-> bool {
-    let d: Vec<i32> = v.windows(2).map(|x| x[1] as i32 - x[0] as i32).collect();
-
-    if d.iter().all(|w| w >=&1 && w <= &3) {
-        return true;
-    }
-    if d.iter().all(|w|  w <= &-1 && w >= &-3 ) {
-        return true;
-    }
-    return false;
 }
