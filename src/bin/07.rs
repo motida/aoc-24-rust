@@ -48,9 +48,9 @@ fn main() -> Result<()> {
     // TODO: Set the expected answer for the test input
     //assert_eq!(3749, part1(BufReader::new(TEST.as_bytes()))?);
 
-    // let input_file = BufReader::new(File::open(INPUT_FILE)?);
-    // let result = time_snippet!(part1(input_file)?);
-    // println!("Result = {}", result);
+    let input_file = BufReader::new(File::open(INPUT_FILE)?);
+    let result = time_snippet!(part1(input_file)?);
+    println!("Result = {}", result);
     //endregion
 
     //region Part 2
@@ -91,6 +91,7 @@ fn check_equation(
     total_valid: u128,
     part_2: bool,
 ) -> u128 {
+
     let mut new_total_valid = total_valid;
     if index == operands.len() {
         if expected == accumulator {
