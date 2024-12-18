@@ -29,11 +29,11 @@ fn main() -> Result<()> {
         Ok(stones.len())
     }
 
-    // assert_eq!(55312, part1(BufReader::new(TEST.as_bytes()))?);
+    assert_eq!(55312, part1(BufReader::new(TEST.as_bytes()))?);
 
-    // let input_file = BufReader::new(File::open(INPUT_FILE)?);
-    // let result = time_snippet!(part1(input_file)?);
-    // println!("Result = {}", result);
+    let input_file = BufReader::new(File::open(INPUT_FILE)?);
+    let result = time_snippet!(part1(input_file)?);
+    println!("Result = {}", result);
     //endregion
 
     //region Part 2
