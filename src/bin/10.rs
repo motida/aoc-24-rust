@@ -1,11 +1,8 @@
 use anyhow::*;
-use itertools::any;
-use std::collections::{HashMap, HashSet};
+use std::collections::HashSet;
 use std::fs::File;
 use std::io::{BufRead, BufReader};
-use std::mem::discriminant;
-use std::path::Ancestors;
-use std::{isize, usize};
+use std::usize;
 
 use adv_code_2024::*;
 use code_timing_macros::time_snippet;
