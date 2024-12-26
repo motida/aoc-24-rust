@@ -1,7 +1,6 @@
 use anyhow::*;
 use std::collections::{HashMap, HashSet};
 use std::fs::File;
-use std::io::{self, Cursor};
 use std::io::{BufRead, BufReader};
 
 use adv_code_2024::*;
@@ -12,30 +11,30 @@ const DAY: &str = "15"; // TODO: Fill the day
 const INPUT_FILE: &str = concatcp!("input/", DAY, ".txt");
 
 
-const TEST_PART2_SMALL: &str = "\
-#######
-#...#.#
-#.....#
-#..OO@#
-#..O..#
-#.....#
-#######
+// const TEST_PART2_SMALL: &str = "\
+// #######
+// #...#.#
+// #.....#
+// #..OO@#
+// #..O..#
+// #.....#
+// #######
 
-<vv<<^^<<^^
-";
+// <vv<<^^<<^^
+// ";
 
-const TEST_PART1_SMALL: &str = "\
-########
-#..O.O.#
-##@.O..#
-#...O..#
-#.#.O..#
-#...O..#
-#......#
-########
+// const TEST_PART1_SMALL: &str = "\
+// ########
+// #..O.O.#
+// ##@.O..#
+// #...O..#
+// #.#.O..#
+// #...O..#
+// #......#
+// ########
 
-<^^>>>vv<v>>v<<>^<v<^
-";
+// <^^>>>vv<v>>v<<>^<v<^
+// ";
 
 const TEST: &str = "\
 ##########
@@ -87,7 +86,7 @@ fn main() -> Result<()> {
     println!("\n=== Part 2 ===");
 
     fn part2<R: BufRead>(reader: R) -> Result<usize> {
-        let (mut map, robot_start_pos, moves) = read_input(reader);
+        let (map, _, moves) = read_input(reader);
         print_map(&map);
         let (mut map, robot_start_pos) = widen_map(map);
         //println!("Movements: {:?}", moves);
@@ -113,7 +112,7 @@ fn main() -> Result<()> {
         }
     }
 
-    fn simulate_2(mut map: &Vec<Vec<char>>, start_pos: (usize, usize), moves: Vec<char>) -> Vec<Vec<char>> {
+    fn simulate_2(map: &Vec<Vec<char>>, start_pos: (usize, usize), moves: Vec<char>) -> Vec<Vec<char>> {
         let mut robot_pos = start_pos.clone();
         let mut current_map = map.clone();
         for movement in moves {
@@ -206,7 +205,7 @@ fn main() -> Result<()> {
         let next_pos = ((pos.0 as isize + dx) as usize, pos.1);
         let (next_tile_left, next_tile_right) =
             (map[next_pos.0][next_pos.1], map[next_pos.0][next_pos.1 + 1]);
-        let mut can_move_box = true;
+        let mut can_move_box;
         match (next_tile_left, next_tile_right) {
             ('.', '.') => {
                 can_move_box = true;
@@ -330,7 +329,7 @@ fn main() -> Result<()> {
         let mut new_map = Vec::new();
         let mut start_pos = (0, 0);
         let mut x = 0;
-        let mut y = 0;
+        let mut y;
 
         for row in map {
             let mut chars_vec = Vec::<char>::new();
@@ -363,7 +362,7 @@ fn main() -> Result<()> {
         let mut moves = Vec::new();
         let mut map_section: bool = true;
         let mut x = 0;
-        let mut y = 0;
+        let mut y;
         for result in reader.lines() {
             let line = result.unwrap().trim().to_string();
             if line.is_empty() {
