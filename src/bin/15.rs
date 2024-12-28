@@ -1,6 +1,7 @@
 use anyhow::*;
 use std::collections::{HashMap, HashSet};
 use std::fs::File;
+use std::io::{self, Cursor};
 use std::io::{BufRead, BufReader};
 
 use adv_code_2024::*;
@@ -11,30 +12,30 @@ const DAY: &str = "15"; // TODO: Fill the day
 const INPUT_FILE: &str = concatcp!("input/", DAY, ".txt");
 
 
-// const TEST_PART2_SMALL: &str = "\
-// #######
-// #...#.#
-// #.....#
-// #..OO@#
-// #..O..#
-// #.....#
-// #######
+const TEST_PART2_SMALL: &str = "\
+#######
+#...#.#
+#.....#
+#..OO@#
+#..O..#
+#.....#
+#######
 
-// <vv<<^^<<^^
-// ";
+<vv<<^^<<^^
+";
 
-// const TEST_PART1_SMALL: &str = "\
-// ########
-// #..O.O.#
-// ##@.O..#
-// #...O..#
-// #.#.O..#
-// #...O..#
-// #......#
-// ########
+const TEST_PART1_SMALL: &str = "\
+########
+#..O.O.#
+##@.O..#
+#...O..#
+#.#.O..#
+#...O..#
+#......#
+########
 
-// <^^>>>vv<v>>v<<>^<v<^
-// ";
+<^^>>>vv<v>>v<<>^<v<^
+";
 
 const TEST: &str = "\
 ##########
