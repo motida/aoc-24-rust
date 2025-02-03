@@ -137,6 +137,7 @@ fn main() -> Result<()> {
             full_adder_wires.insert(w.0.clone(), w.1.clone());
         }
         gen_dot_file(&full_adder);
+        gen_dot_file(&gates);
         // used graphviz to find wrong wiring
         //
         let (input1, input2) = calc_input(&wires);
@@ -236,7 +237,7 @@ fn gen_full_adder() -> (
         gate: GATE::XOR,
         out: "r01".to_string(),
     };
-    
+
     for i in 1..=44 {
         let x = format!("x{:02}", i);
         let y = format!("y{:02}", i);
